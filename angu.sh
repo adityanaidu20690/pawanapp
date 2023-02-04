@@ -6,4 +6,4 @@ git --version
 #npm install -g @angular/cli
 ng new addy
 #cp -rvp /root/addy .
-cd addy/
+cd /var/lib/jenkins/workspace/automation/addy
