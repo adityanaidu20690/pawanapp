@@ -59,11 +59,36 @@ stage('maven') {
 --format="HTML"''', odcInstallation: 'default'
             }
         }
+        stage('Docker Build'){
+          steps{
+	sh '''docker build -t demo .
+docker tag calc adityanaidu20690/demo:latest
+'''
+	}
+    }
+    stage ('Image scanning'){
+        steps{
+            sh '''trivy image adityanaidu20690/demo:latest'''
+        }
+    }
+	stage('Docker Hub'){
+          steps{
+	sh '''docker build -t demo .
+docker tag calc adityanaidu20690/demo:latest
+docker push adityanaidu20690/demo:latest'''
+	}
+	}
+    stage('Deploy'){
+        steps{
+            sh 'docker run -d -it --name addycalc -p 8085:8080 adityanaidu20690/demo:latest'
+        }
+    }
 
          stage('publish the report') {
             steps {
                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
+
 }
 }
