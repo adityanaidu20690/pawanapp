@@ -55,14 +55,14 @@ stage('maven') {
          stage('sast owasp') {
             steps {
               dependencyCheck additionalArguments: '''--project=pawanproject
---scan="/home/ec2-test/jenkins/workspace/pawanproject"
+
 --format="HTML"''', odcInstallation: 'default'
             }
         }
         stage('Docker Build'){
           steps{
 	sh '''docker build -t demo .
-docker tag calc adityanaidu20690/demo:latest
+docker tag demo adityanaidu20690/demo:latest
 '''
 	}
     }
