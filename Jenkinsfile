@@ -52,5 +52,18 @@ stage('maven') {
             }
           
         }
+         stage('sast owasp') {
+            steps {
+              dependencyCheck additionalArguments: '''--project=pawanproject
+--scan="/var/lib/jenkins/workspace/pawanproject"
+--format="HTML"''', odcInstallation: 'default'
+            }
+        }
+
+         stage('publish the report') {
+            steps {
+               dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
 }
 }
