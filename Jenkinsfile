@@ -55,7 +55,7 @@ stage('maven') {
          stage('sast owasp') {
             steps {
               dependencyCheck additionalArguments: '''--project=pawanproject
---scan="workspace/pawanproject"
+--scan="/home/ec2-test/jenkins/workspace/pawanproject"
 --format="HTML"''', odcInstallation: 'default'
             }
         }
