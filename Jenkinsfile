@@ -54,9 +54,9 @@ stage('maven') {
         }
          stage('sast owasp') {
             steps {
-              dependencyCheck additionalArguments: '''--project=pawanproject
-
---format="HTML"''', odcInstallation: 'default'
+              dependencyCheck additionalArguments: '''--project	pawandemoproject
+--scan	pawandemoproject
+--format	XML''', odcInstallation: 'default'
             }
         }
         stage('Docker Build'){
